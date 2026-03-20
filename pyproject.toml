@@ -1,0 +1,18 @@
+[project]
+name = "telegram-vision-bot"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "accelerate>=0.33.0",
+    "gradio>=4.42.0",
+    "httpx>=0.27.2",
+    "pillow>=10.4.0",
+    "python-dotenv>=1.0.1",
+    "python-telegram-bot>=21.6",
+    "sentencepiece>=0.2.0",
+    "torch>=2.4.1",
+    "torchvision>=0.19.1",
+    "transformers>=4.44.2",
+]

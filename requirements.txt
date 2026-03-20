@@ -1,0 +1,19 @@
+# Telegram Bot
+python-telegram-bot
+
+# Vision Models (HuggingFace)
+transformers
+torch
+torchvision
+accelerate
+Pillow
+
+# Lightweight model support
+sentencepiece
+
+# Gradio UI
+gradio
+
+# Utilities
+python-dotenv
+httpx

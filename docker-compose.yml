@@ -1,0 +1,43 @@
+version: "3.9"
+
+services:
+  # ── Telegram Bot ──────────────────────────────────────────────────────────
+  bot:
+    build: .
+    container_name: vision_bot
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - USE_LIGHTWEIGHT_MODEL=true
+    volumes:
+      # Persist downloaded model weights across restarts
+      - hf_cache:/app/.cache/huggingface
+    command: ["python", "app.py"]
+    networks:
+      - vision_net
+
+  # ── Gradio Debug UI ───────────────────────────────────────────────────────
+  gradio:
+    build: .
+    container_name: vision_gradio
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - USE_LIGHTWEIGHT_MODEL=true
+      - GRADIO_HOST=0.0.0.0
+      - GRADIO_PORT=7860
+    volumes:
+      - hf_cache:/app/.cache/huggingface
+    ports:
+      - "7860:7860"
+    command: ["python", "app.py", "--ui-only"]
+    networks:
+      - vision_net
+
+volumes:
+  hf_cache:
+    driver: local
+
+networks:
+  vision_net:
+    driver: bridge
