@@ -124,18 +124,28 @@ photo_handler() called
 ### Prerequisites
 
 - Python 3.11+
+- uv — fast Python package manager
 - A Telegram bot token from [@BotFather](https://t.me/BotFather)
 - ~500MB disk space (lightweight model) or ~6–14GB (BLIP-2/LLaVA)
+
+Install uv if you don't have it yet:
+ 
+```bash
+# macOS / Linux
+curl -LsSf https://astral.sh/uv/install.sh | sh
+ 
+# Windows (PowerShell)
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
 
 ### 1. Clone and set up
 
 ```bash
-git clone <repo>
+git clone git@github.com:RishitSingh10/telegram-vision-bot.git
 cd telegram-vision-bot
 
-python -m venv venv
-source venv/bin/activate      # Windows: venv\Scripts\activate
-pip install -r requirements.txt
+uv sync
+source .venv/bin/activate      # Windows: .venv\Scripts\activate
 ```
 
 ### 2. Configure environment
