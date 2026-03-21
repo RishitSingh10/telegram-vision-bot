@@ -91,13 +91,14 @@ async def summarize_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     parts = []
 
-    # Last image summary
-    img_summary = session.get_last_image_summary()
+    # Last image summary — escape all dynamic content before embedding in MarkdownV2
+    img_summary = escape_md(session.get_last_image_summary())
     parts.append(f"*Last Image Analysis:*\n{img_summary}")
 
-    # Conversation history
+    # Conversation history — lives inside a code block so escaping is not needed,
+    # but the surrounding label still needs escaped punctuation.
     history = session.get_history_text()
-    parts.append(f"\n*Recent Conversation \\(last {3} interactions\\):*\n```\n{history}\n```")
+    parts.append(f"\n*Recent Conversation \\(last 3 interactions\\):*\n```\n{history}\n```")
 
     response = "\n".join(parts)
 
@@ -225,6 +226,10 @@ async def text_message_handler(update: Update, context: ContextTypes.DEFAULT_TYP
 # ──────────────────────────────────────────────────────────────────────────────
 
 def escape_md(text: str) -> str:
-    """Escape special MarkdownV2 characters."""
+    """Escape all MarkdownV2 special characters.
+    Full list per Telegram docs:
+    https://core.telegram.org/bots/api#markdownv2-style
+    """
+    # '#' was missing — it IS reserved in MarkdownV2 and must be escaped
     special = r"\_*[]()~`>#+-=|{}.!"
     return "".join(f"\\{c}" if c in special else c for c in str(text))

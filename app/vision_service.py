@@ -55,7 +55,7 @@ class VisionService:
         self._processor = ViTImageProcessor.from_pretrained(model_id)
         self._tokenizer = AutoTokenizer.from_pretrained(model_id)
         self._model = VisionEncoderDecoderModel.from_pretrained(model_id)
-        self._device = "cuda" if torch.cuda.is_available() else "cpu"
+        self._device = "cpu"
         self._model.to(self._device)
         self._model_type = "vit-gpt2"
         logger.info(f"Lightweight model loaded on {self._device}")

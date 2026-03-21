@@ -160,13 +160,6 @@ python app.py --ui-only
 
 The Gradio UI is available at: **http://localhost:7860**
 
-### 4. Run tests
-
-```bash
-pip install pytest
-pytest tests/ -v
-```
-
 ---
 
 ## 🐳 Docker Compose
@@ -265,9 +258,6 @@ telegram-vision-bot/
 │   ├── session_manager.py  # Per-user history & state
 │   ├── gradio_ui.py        # Local debug UI
 │   └── config.py           # Environment-based config
-├── tests/
-│   ├── conftest.py
-│   └── test_bot.py         # Unit tests (18 tests)
 ├── app.py                  # Unified entry point
 ├── requirements.txt
 ├── Dockerfile
